@@ -1,21 +1,33 @@
-# Configuration and utilities
+"""Main entry point for the application."""
+from .config import ConfigLoader
+from .debug_tools import Debugger, DebugOptions
+from .log_tools import Logger
+
+app_logger = Logger.get_app_logger()
 
 
-# Configuration and utilities
-from .config import ConfigLoader, ConfigVars
-
-
-def init() -> None:
-    # Initialize the application
-    # This is where you would load the configuration, connect to the database, etc.
-    print("Initializing the application...")
-
-
-def main(config: ConfigVars) -> None:
+def print_hello_world() -> None:
+    """Print hello world."""
     print("Hello, World!")
 
 
-if __name__ == "__main__":
-    # Load the configuration and start the application
-    _config = ConfigLoader.get_config()
-    main(_config)
+def load_config() -> DebugOptions:
+    """Load configuration and return an instance of DebugOptions."""
+    config = ConfigLoader.get_config()
+    return DebugOptions(
+        flag=config["ATTACH_DEBUGGER"],
+        wait_for_client=config["WAIT_FOR_CLIENT"],
+        host=config["DEBUGPY_HOST"],
+        port=config["DEFAULT_DEBUG_PORT"],
+    )
+
+
+def main() -> None:
+    """Main method."""
+    app_logger.info("Loading")
+
+    # Set up the debugger if enabled in the configuration
+    debug_options = load_config()
+    Debugger.setup_debugpy(app_logger, debug_options)
+
+    print_hello_world()
