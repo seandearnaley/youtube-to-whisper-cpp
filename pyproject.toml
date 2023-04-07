@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "youtube-to-whisper-api"
+version = "0.1.0"
+description = "YouTube to Whisper CPP API"
+authors = ["Sean Dearnaley <SeanDearnaley@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9.8"
+openai = "^0.27.4"
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^1.0.0"
+pytest = "^7.2.2"
+mypy = "^1.2.0"
+black = "^23.3.0"
+debugpy = "^1.6.7"
+pylint = "^2.17.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint]
+init-hook='import sys; sys.path.append("./src")'
+disable = [
+    "E0402"
+]
+
+[tool.poetry.scripts]
+run-main = "src.main:init"
