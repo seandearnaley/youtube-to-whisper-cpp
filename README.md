@@ -10,16 +10,14 @@ It uses [whisper.cpp](https://github.com/ggerganov/whisper.cpp) for speech recog
 youtube-2-whisper-cpp/
 |-- logs/
 |-- samples/
-|   |-- jfk.wav
 |-- scripts/
+|-- outputs/ (this is where the output files will be stored)
 |-- src/
 |   |-- app/
 |   |   |-- audio_tools.py
 |   |   |-- whispercc.py
 |   |   |-- youtube_dl.py
 |   |-- tests/
-|   |   |-- __init__.py
-|   |   |-- test_src.py
 |   |-- utils/
 |   |-- __init__.py
 |   |-- __main__.py
@@ -62,7 +60,9 @@ This script is the main entry point for the application. It downloads a YouTube 
 ## Usage
 
 1. Set up the environment variables by copying the `.env.example` file to a new file named `.env` and modifying the values as needed.
-2. Run the application using `poetry run run-main`.
+2. Run the application using `poetry run run-main <url> [<output_file_name>] [<transcript_file_path>]`. (note the output_file_name is the wav from the dl)
+
+Alternative Usage: python3 main.py <url> [<output_file_name>] [<transcript_file_path>]
 
 ## Contributing
 

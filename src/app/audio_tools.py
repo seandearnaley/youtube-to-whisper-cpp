@@ -1,4 +1,5 @@
 """Audio tools for processing audio files"""
+import os
 from pathlib import Path
 
 import ffmpeg
@@ -31,12 +32,15 @@ def convert_to_float_array(audio_data: bytes) -> NdArray:
     return float_array
 
 
-def convert_audio_format(input_file: str, output_file: str, audio_format: str) -> str:
+def convert_audio_format(
+    input_file: str, output_file_name: str, audio_format: str
+) -> str:
     """Convert an audio file to a different format"""
     try:
+        output_file_path = os.path.join(os.getcwd(), "outputs", output_file_name)
         audio = ffmpeg.input(input_file)
-        audio = audio.output(output_file, format=audio_format)
+        audio = audio.output(output_file_path, format=audio_format)
         audio.run()
-        return output_file
+        return output_file_path
     except Exception as err:
         raise RuntimeError(f"Error converting audio format: {err}") from err
