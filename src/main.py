@@ -2,8 +2,9 @@
 import sys
 from pathlib import Path
 
+from .app.audio_tools import convert_audio_format
 from .app.whispercc import WhisperTranscriber
-from .app.youtube_dl import convert_audio_to_wav, download_video
+from .app.youtube_dl import download_video
 from .config import ConfigLoader
 from .debug_tools import Debugger, DebugOptions
 from .log_tools import Logger
@@ -11,13 +12,8 @@ from .log_tools import Logger
 app_logger = Logger.get_app_logger()
 
 
-def print_hello_world() -> None:
-    """Print hello world."""
-    print("Hello, World!")
-
-
-def load_config() -> DebugOptions:
-    """Load configuration and return an instance of DebugOptions."""
+def load_debugger_config() -> DebugOptions:
+    """Load the configuration from the config file."""
     config = ConfigLoader.get_config()
     return DebugOptions(
         flag=config["ATTACH_DEBUGGER"],
@@ -27,14 +23,8 @@ def load_config() -> DebugOptions:
     )
 
 
-def main() -> None:
-    """Main method."""
-    app_logger.info("Loading")
-
-    # Set up the debugger if enabled in the configuration
-    debug_options = load_config()
-    Debugger.setup_debugpy(app_logger, debug_options)
-
+def do_job() -> None:
+    """Do the job."""
     url = "https://www.youtube.com/watch?v=iq9a-cP0T2g&t=1969s"
     output_file = "h3h3.wav"
 
@@ -42,11 +32,20 @@ def main() -> None:
     if downloaded_file is None:
         sys.exit(2)
 
-    converted_file = convert_audio_to_wav(downloaded_file, output_file)
+    converted_file = convert_audio_format(downloaded_file, output_file, "wav")
     if not converted_file:
         sys.exit(3)
 
     _audio_file = Path(converted_file)
-    transcriber = WhisperTranscriber("tiny.en")
+    transcriber = WhisperTranscriber("base.en")
     transcription = transcriber.transcribe_audio(_audio_file)
     print(transcription)
+
+
+def main() -> None:
+    """Main entry point for the application."""
+    app_logger.info("Loading")
+
+    Debugger.setup_debugpy(app_logger, load_debugger_config())
+
+    do_job()
