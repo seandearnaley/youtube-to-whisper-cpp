@@ -2,6 +2,8 @@
 
 This project is a simple YouTube transcriber that converts YouTube videos to text using the Whisper CPP library. The transcriptions are generated from the audio of the YouTube video.
 
+It uses [whisper.cpp](https://github.com/ggerganov/whisper.cpp) for speech recognition and [pytube](https://pytube.io/en/latest/) for downloading YouTube videos. It also uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) for audio processing.  You will need to follow their installation instructions to install the necessary dependencies.  (Note: The `ffmpeg` executable must be in your `PATH` environment variable.)
+
 ## Folder Structure
 
 ```
