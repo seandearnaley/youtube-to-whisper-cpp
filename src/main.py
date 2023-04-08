@@ -1,8 +1,9 @@
 """Main entry point for the application."""
-
+import sys
 from pathlib import Path
 
 from .app.whispercc import WhisperTranscriber
+from .app.youtube_dl import convert_audio_to_wav, download_video
 from .config import ConfigLoader
 from .debug_tools import Debugger, DebugOptions
 from .log_tools import Logger
@@ -34,11 +35,18 @@ def main() -> None:
     debug_options = load_config()
     Debugger.setup_debugpy(app_logger, debug_options)
 
-    print_hello_world()
+    url = "https://www.youtube.com/watch?v=iq9a-cP0T2g&t=1969s"
+    output_file = "h3h3.wav"
 
-    _audio_file = Path(
-        "/Users/seandearnaley/Documents/GitHub/youtube-2-whisper-experiments/samples/George_W_Bush_Columbia_FINAL.ogg"  # pylint: disable=line-too-long  # noqa: E501
-    )
+    downloaded_file = download_video(url)
+    if downloaded_file is None:
+        sys.exit(2)
+
+    converted_file = convert_audio_to_wav(downloaded_file, output_file)
+    if not converted_file:
+        sys.exit(3)
+
+    _audio_file = Path(converted_file)
     transcriber = WhisperTranscriber("tiny.en")
     transcription = transcriber.transcribe_audio(_audio_file)
     print(transcription)
