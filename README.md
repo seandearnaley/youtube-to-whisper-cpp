@@ -60,7 +60,7 @@ This script is the main entry point for the application. It downloads a YouTube 
 ## Usage
 
 1. Set up the environment variables by copying the `.env.example` file to a new file named `.env` and modifying the values as needed.
-2. Run the application using `poetry run run-main <url> [<output_file_name>] [<transcript_file_path>]`. (note the output_file_name is the wav from the dl)
+2. Run the application using `poetry run transcribe <url> [<output_file_name>] [<transcript_file_path>]`. (note the output_file_name is the wav from the dl)
 
 Alternative Usage: python3 main.py <url> [<output_file_name>] [<transcript_file_path>]
 

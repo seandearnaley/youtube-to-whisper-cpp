@@ -35,4 +35,4 @@ disable = [
 ]
 
 [tool.poetry.scripts]
-run-main = "src.main:main"
+transcribe = "src.main:main"
