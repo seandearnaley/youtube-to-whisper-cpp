@@ -70,5 +70,3 @@ class Debugger:
         if cls._debugger_set_up:
             logger.info("Remote debugging is NOT active")
             cls._debugger_set_up = False
-            logger.info("Remote debugging is NOT active")
-            cls._debugger_set_up = False
