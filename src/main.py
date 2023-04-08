@@ -1,5 +1,4 @@
 """Main entry point for the application."""
-import datetime
 import os
 import sys
 from pathlib import Path
@@ -10,6 +9,7 @@ from .app.youtube_dl import download_video
 from .config import ConfigLoader
 from .debug_tools import Debugger, DebugOptions
 from .log_tools import Logger
+from .utils.file_operations import get_default_filename, save_transcript_to_file
 
 app_logger = Logger.get_app_logger()
 
@@ -23,24 +23,6 @@ def load_debugger_config() -> DebugOptions:
         host=config["DEBUGPY_HOST"],
         port=config["DEFAULT_DEBUG_PORT"],
     )
-
-
-def get_default_transcript_filename() -> str:
-    """Generate a default transcript filename with a timestamp."""
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    return f"{timestamp}_transcript.txt"
-
-
-def get_default_output_filename() -> str:
-    """Generate a default output filename with a timestamp."""
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    return f"{timestamp}_output.wav"
-
-
-def save_transcript_to_file(transcript: str, file_path: str) -> None:
-    """Save the transcript to a text file."""
-    with open(file_path, "w", encoding="utf-8") as transcript_file:
-        transcript_file.write(transcript)
 
 
 def do_job(url: str, output_file_name: str, transcript_file_path: str) -> None:
@@ -75,11 +57,10 @@ def main() -> None:
 
     url = sys.argv[1]
     output_file_name = (
-        sys.argv[2] if len(sys.argv) >= 3 else get_default_output_filename()
+        sys.argv[2] if len(sys.argv) >= 3 else get_default_filename("output.wav")
     )
     transcript_file_path = (
-        sys.argv[3] if len(sys.argv) >= 4 else get_default_transcript_filename()
+        sys.argv[3] if len(sys.argv) >= 4 else get_default_filename("transcript.txt")
     )
     transcript_file_path = os.path.join(os.getcwd(), "outputs", transcript_file_path)
-
     do_job(url, output_file_name, transcript_file_path)
