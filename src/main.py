@@ -13,6 +13,8 @@ from .utils.file_operations import get_default_filename, save_transcript_to_file
 
 app_logger = Logger.get_app_logger()
 
+MODEL = "tiny.en"
+
 
 def load_debugger_config() -> DebugOptions:
     """Load the configuration from the config file."""
@@ -37,7 +39,7 @@ def do_job(url: str, output_file_name: str, transcript_file_path: str) -> None:
         sys.exit(3)
 
     _audio_file = Path(converted_file)
-    transcriber = WhisperTranscriber("tiny.en")
+    transcriber = WhisperTranscriber(MODEL)
     transcription = transcriber.transcribe_audio(_audio_file)
     print(transcription)
 
