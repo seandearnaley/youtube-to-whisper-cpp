@@ -26,7 +26,8 @@ This script is the main entry point for the application. It downloads a YouTube 
 
 1. Install [Poetry](https://python-poetry.org/docs/#installation) if you haven't already.
 2. Clone the repository and navigate to the project directory.
-3. Run `poetry install` to install the dependencies.
+3. I suggest using python 3.10.11 `poetry env use 3.10.11`, whisper cpp bindings will need wheels for your architecture. See [docs](https://github.com/aarnphm/whispercpp)
+4. Run `poetry install` to install the dependencies.
 
 ## Usage
 
