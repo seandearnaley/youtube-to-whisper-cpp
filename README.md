@@ -4,35 +4,6 @@ This project is a simple YouTube transcriber that converts YouTube videos to tex
 
 It uses [whisper.cpp](https://github.com/ggerganov/whisper.cpp) for speech recognition (with python bindings by [aarnphm](https://github.com/aarnphm/whispercpp)) and [pytube](https://pytube.io/en/latest/) for downloading YouTube videos. It also uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) for audio processing.  You will need to follow their installation instructions to install the necessary dependencies.  (Note: [ffmpeg](http://www.ffmpeg.org/) must be installed and the `ffmpeg` executable must be in your `PATH` environment variable.)
 
-## Folder Structure
-
-```
-youtube-2-whisper-cpp/
-|-- logs/
-|-- samples/
-|-- scripts/
-|-- outputs/ (this is where the output files will be stored)
-|-- src/
-|   |-- app/
-|   |   |-- audio_tools.py
-|   |   |-- whispercc.py
-|   |   |-- youtube_dl.py
-|   |-- tests/
-|   |-- utils/
-|   |-- __init__.py
-|   |-- __main__.py
-|   |-- config.py
-|   |-- debug_tools.py
-|   |-- env.py
-|   |-- log_tools.py
-|   |-- main.py
-|-- .env.example
-|-- .gitignore
-|-- poetry.lock
-|-- pyproject.toml
-|-- README.md
-```
-
 ## Main Scripts
 
 ### src/app/audio_tools.py
