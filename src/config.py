@@ -1,52 +1,27 @@
-"""Configuration file for the Reddit Summarizer."""
-
+"""Module for loading configuration variables."""
 from functools import wraps
-from typing import Any, Callable, Dict, Tuple, TypedDict, TypeVar
-
-
-class ConfigVars(TypedDict):
-    """Type definition for configuration variables."""
-
-    DEFAULT_GPT_MODEL: str
-    ATTACH_DEBUGGER: bool
-    WAIT_FOR_CLIENT: bool
-    DEFAULT_DEBUG_PORT: int
-    DEBUGPY_HOST: str
-    LOG_FILE_PATH: str
-    LOG_COLORS: Dict[str, str]
-    LOG_NAME: str
+from typing import Any, Callable
 
 
 class ConfigLoader:
     """Class for loading configuration variables."""
 
-    CONFIG_VARS: ConfigVars = ConfigVars(
-        DEFAULT_GPT_MODEL="gpt-3.5-turbo",
-        ATTACH_DEBUGGER=True,
-        WAIT_FOR_CLIENT=False,
-        DEFAULT_DEBUG_PORT=8765,
-        DEBUGPY_HOST="localhost",
-        LOG_FILE_PATH="./logs/log.log",
-        LOG_COLORS={
-            "DEBUG": "cyan",
-            "INFO": "green",
-            "WARNING": "yellow",
-            "ERROR": "red",
-            "CRITICAL": "bold_red",
-        },
-        LOG_NAME="reddit_gpt_summarizer_log",
-    )
-
-    @classmethod
-    def get_config(cls) -> ConfigVars:
-        """Returns a dictionary with configuration parameters."""
-        return cls.CONFIG_VARS
+    attach_debugger: bool = True
+    wait_for_client: bool = False
+    default_debug_port: int = 8765
+    debugpy_host: str = "localhost"
+    log_file_path: str = "./logs/log.log"
+    log_colors: dict[str, str] = {
+        "DEBUG": "cyan",
+        "INFO": "green",
+        "WARNING": "yellow",
+        "ERROR": "red",
+        "CRITICAL": "bold_red",
+    }
+    log_name: str = "log"
 
 
-R = TypeVar("R")
-
-
-def with_config(func: Callable[..., R]) -> Callable[..., R]:
+def with_config(func: Callable[..., Any]) -> Callable[..., Any]:
     """
     A decorator to inject environment variables into a function.
 
@@ -59,8 +34,8 @@ def with_config(func: Callable[..., R]) -> Callable[..., R]:
     """
 
     @wraps(func)
-    def wrapper(*args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> R:
-        config: ConfigVars = ConfigLoader.get_config()
+    def wrapper(*args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Any:
+        config: ConfigLoader = ConfigLoader()
         return func(*args, config=config, **kwargs)
 
     return wrapper

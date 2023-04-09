@@ -18,12 +18,12 @@ MODEL = "tiny.en"
 
 def load_debugger_config() -> DebugOptions:
     """Load the configuration from the config file."""
-    config = ConfigLoader.get_config()
+    config = ConfigLoader
     return DebugOptions(
-        flag=config["ATTACH_DEBUGGER"],
-        wait_for_client=config["WAIT_FOR_CLIENT"],
-        host=config["DEBUGPY_HOST"],
-        port=config["DEFAULT_DEBUG_PORT"],
+        flag=config.attach_debugger,
+        wait_for_client=config.wait_for_client,
+        host=config.debugpy_host,
+        port=config.default_debug_port,
     )
 
 
