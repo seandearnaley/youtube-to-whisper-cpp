@@ -15,28 +15,28 @@ T = TypeVar("T")
 class Logger:
     """Class to handle logging configuration."""
 
-    _config = ConfigLoader
-    _log_name = _config.log_name
-    _log_file_path = os.path.abspath(_config.log_name)
+    config = ConfigLoader
+    log_name = config.log_name
+    log_file_path = os.path.abspath(config.log_file_path)
 
     # Create the directory for log files if it doesn't exist
-    if not os.path.exists(os.path.dirname(_log_file_path)):
-        os.makedirs(os.path.dirname(_log_file_path))
-    _logging_config = {
+    if not os.path.exists(os.path.dirname(log_file_path)):
+        os.makedirs(os.path.dirname(log_file_path))
+    loggingconfig = {
         "version": 1,
         "disable_existing_loggers": False,
         "formatters": {
             "color": {
                 "()": "colorlog.ColoredFormatter",
                 "format": "%(log_color)s%(levelname)s:%(message)s",
-                "log_colors": _config.log_colors,
+                "log_colors": config.log_colors,
             }
         },
         "handlers": {
             "file": {
                 "class": "logging.FileHandler",
                 "formatter": "color",
-                "filename": _log_file_path,
+                "filename": log_file_path,
             },
             "console": {
                 "class": "logging.StreamHandler",
@@ -44,7 +44,7 @@ class Logger:
             },
         },
         "loggers": {
-            _log_name: {
+            log_name: {
                 "handlers": ["file", "console"],
                 "level": logging.INFO,
             }
@@ -53,12 +53,12 @@ class Logger:
 
     # Load the logging configuration using dictConfig
     try:
-        logging.config.dictConfig(_logging_config)
+        logging.config.dictConfig(loggingconfig)
     except ValueError as e:
         print(f"Error occurred during logging configuration: {str(e)}")
         raise
 
-    app_logger = logging.getLogger(_log_name)
+    app_logger = logging.getLogger(log_name)
     app_logger.debug("Logging is configured.")
 
     @classmethod

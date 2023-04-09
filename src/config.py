@@ -11,6 +11,7 @@ class ConfigLoader:
     default_debug_port: int = 8765
     debugpy_host: str = "localhost"
     log_file_path: str = "./logs/log.log"
+    log_name: str = "youtube-to-whisper-cpp-log"
     log_colors: dict[str, str] = {
         "DEBUG": "cyan",
         "INFO": "green",
@@ -18,7 +19,6 @@ class ConfigLoader:
         "ERROR": "red",
         "CRITICAL": "bold_red",
     }
-    log_name: str = "logs/log.txt"
 
 
 def with_config(func: Callable[..., Any]) -> Callable[..., Any]:
