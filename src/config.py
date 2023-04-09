@@ -18,7 +18,7 @@ class ConfigLoader:
         "ERROR": "red",
         "CRITICAL": "bold_red",
     }
-    log_name: str = "log"
+    log_name: str = "logs/log.txt"
 
 
 def with_config(func: Callable[..., Any]) -> Callable[..., Any]:
