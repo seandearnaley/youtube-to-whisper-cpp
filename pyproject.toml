@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "YouTube to Whisper CPP API"
 authors = ["Sean Dearnaley <SeanDearnaley@hotmail.com>"]
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [
+    { include = "main.py" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10.11"
@@ -29,11 +31,6 @@ ruff = "^0.0.261"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.pylint]
-init-hook='import sys; sys.path.append("./src")'
-disable = [
-    "E0402"
-]
 
 [tool.poetry.scripts]
-transcribe = "src.main:main"
+transcribe = "main:main"

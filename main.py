@@ -3,13 +3,13 @@ import os
 import sys
 from pathlib import Path
 
-from .app.audio_tools import convert_audio_format
-from .app.whispercc import WhisperTranscriber
-from .app.youtube_dl import download_video
-from .config import ConfigLoader
-from .debug_tools import Debugger, DebugOptions
-from .log_tools import Logger
-from .utils.file_operations import get_default_filename, save_transcript_to_file
+from app.audio_tools import convert_audio_format
+from app.whispercc import WhisperTranscriber
+from app.youtube_dl import download_video
+from config import ConfigLoader
+from debug_tools import Debugger, DebugOptions
+from log_tools import Logger
+from utils.file_operations import get_default_filename, save_transcript_to_file
 
 app_logger = Logger.get_app_logger()
 
@@ -66,3 +66,7 @@ def main() -> None:
     )
     transcript_file_path = os.path.join(os.getcwd(), "outputs", transcript_file_path)
     do_job(url, output_file_name, transcript_file_path)
+
+
+if __name__ == "__main__":
+    main()

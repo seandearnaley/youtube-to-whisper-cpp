@@ -2,7 +2,7 @@
 import os
 import re
 
-from src.utils.file_operations import get_default_filename, save_transcript_to_file
+from utils.file_operations import get_default_filename, save_transcript_to_file
 
 
 def test_get_default_filename():

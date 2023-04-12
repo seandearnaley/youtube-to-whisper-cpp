@@ -2,7 +2,7 @@
 from pathlib import Path
 from unittest.mock import MagicMock
 
-from src.app.whispercc import WhisperTranscriber
+from app.whispercc import WhisperTranscriber
 
 
 def test_whisper_transcriber():

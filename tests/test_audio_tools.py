@@ -4,11 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.app.audio_tools import (
-    convert_audio_format,
-    convert_to_float_array,
-    decode_audio,
-)
+from app.audio_tools import convert_audio_format, convert_to_float_array, decode_audio
 
 
 def test_decode_audio():

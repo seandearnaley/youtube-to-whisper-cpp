@@ -1,7 +1,7 @@
 """Test the youtube_dl module"""
 import os
 
-from src.app.youtube_dl import download_video
+from app.youtube_dl import download_video
 
 
 def test_download_video(tmpdir):
