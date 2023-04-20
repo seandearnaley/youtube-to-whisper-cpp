@@ -1,5 +1,7 @@
 # YouTube to Whisper CPP Transcriber
 
+Article to accompany this code [Whisper Showdown @ Medium](https://seandearnaley.medium.com/427ce5f486ea)
+
 This project is a simple YouTube transcriber that transcribes YouTube videos using the Whisper CPP library. No GPU required, no calls to OpenAI. The transcriptions are generated from the audio of the YouTube video.
 
 It uses [whisper.cpp](https://github.com/ggerganov/whisper.cpp) for speech recognition (with python bindings by [aarnphm](https://github.com/aarnphm/whispercpp)) and [pytube](https://pytube.io/en/latest/) for downloading YouTube videos. It also uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) for audio processing.  You will need to follow their installation instructions to install the necessary dependencies.  (Note: [ffmpeg](http://www.ffmpeg.org/) must be installed and the `ffmpeg` executable must be in your `PATH` environment variable.)
